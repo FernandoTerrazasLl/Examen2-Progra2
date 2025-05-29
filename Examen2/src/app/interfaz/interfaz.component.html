@@ -1,0 +1,64 @@
+<div>
+  <div *ngIf="mostrarTabla">
+    <h1>Gestión de Ideas de Startup</h1>
+    <button (click)="CrearIdea()">Agregar Idea</button>
+    
+    <table *ngIf="tablaIdeas.length > 1">
+      <thead>
+        <tr>
+          <th *ngFor="let columna of tablaIdeas[0]">{{ columna }}</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fila of tablaIdeas.slice(1)">
+          <td>{{ fila[0] }}</td>
+          <td>{{ fila[1] }}</td>
+          <td>{{ fila[2] }}</td>
+          <td>{{ fila[3] }}</td>
+          <td>{{ fila[4] }}</td>
+          <td>{{ fila[5] }}</td>
+          <td>
+            <button (click)="EditarIdea(fila[0])">Editar</button>
+            <button (click)="EliminarIdea(fila[0])">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="mostrarFormulario">
+    <form>
+      <div>
+        <label for="titulo">Título de la Idea</label>
+        <input type="text" id="titulo" [(ngModel)]="titulo" name="titulo" placeholder="Ingresa el título de tu idea" required>
+      </div>
+
+      <div>
+        <label for="descripcion">Descripción Detallada</label>
+        <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" placeholder="Describe detalladamente tu idea de negocio" rows="4" required></textarea>
+      </div>
+
+      <div>
+        <label for="categoria">Categoría</label>
+        <select id="categoria" [(ngModel)]="categoria" name="categoria" required>
+          <option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="estado">Estado</label>
+        <select id="estado" [(ngModel)]="estado" name="estado" required>
+          <option *ngFor="let est of estados" [value]="est">{{ est }}</option>
+        </select>
+      </div>
+      
+      <div>
+        <button type="button" (click)="GuardarIdea()">
+          Completar
+        </button>
+        <button type="button" (click)="CancelarFormulario()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
